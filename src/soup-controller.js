@@ -798,9 +798,10 @@ class SoupController {
 
     zoomToSelection () {
         if (this.soup.isEmpty()) {
-            this.setTargetView(this.soupView.getZoomedOutViewOfSelection())
-            this.soupView.isChanged = true
+            return
         }
+        this.setTargetView(this.soupView.getZoomedOutViewOfSelection())
+        this.soupView.isChanged = true
     }
 
     adjustCamera (xRotationAngle, yRotationAngle, zRotationAngle, zoomRatio) {
