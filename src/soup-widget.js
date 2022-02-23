@@ -503,12 +503,14 @@ class SoupWidget extends WebglWidget {
         if (util.exists(iResPressed) && iResPressed === this.iResFirstPressed) {
             if (this.soupView.currentView.show.transparent) {
                 if (!this.soup.isSameChainSelected(iResPressed)) {
-                    this.controller.selectTraceOfResidue(iResPressed)
+                    let chain = this.soup.getResidueProxy(iResPressed).chain
+                    this.controller.selectChain(0, chain)
+                    // this.controller.selectTraceOfResidue(iResPressed)
                 }
             }
             if (!event.metaKey && !event.shiftKey) {
                 console.log('Got here')
-                this.controller.triggerAtom(iAtomPressed)
+                this.controller.triggerAtom(iAtomPressed) // selects residue
             } else if (event.metaKey) {
                 this.controller.toggleSelectResidue(iResPressed)
                 this.controller.zoomToSelection()
