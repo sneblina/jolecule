@@ -520,7 +520,7 @@ class SoupWidget extends WebglWidget {
             } else {
                 this.controller.selectAdditionalResidue(this.iResFirstPressed)
             }
-        } else if (this.soup.selectedTraces.length > 0) {
+        } else if (this.soup.residueStore.selected.includes(1)) {
             this.controller.clearSelectedResidues()
         }
         else {
