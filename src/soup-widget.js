@@ -510,7 +510,7 @@ class SoupWidget extends WebglWidget {
                     this.controller.selectTraceOfResidue(iResPressed)
                 }
             }
-            if (!event.metaKey && !event.shiftKey) {
+            if (!event.metaKey && !event.shiftKey && this.soup.isSameChainSelected(iResPressed)) {
                 console.log('Got here')
                 this.controller.triggerAtom(iAtomPressed) // selects residue
             } else if (event.metaKey) {
