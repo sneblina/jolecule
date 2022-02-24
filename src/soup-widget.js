@@ -501,14 +501,6 @@ class SoupWidget extends WebglWidget {
         let iAtomPressed = this.iAtomHover
         let iResPressed = this.soup.getAtomProxy(iAtomPressed).iRes
         if (util.exists(iResPressed) && iResPressed === this.iResFirstPressed) {
-            if (this.soupView.currentView.show.transparent) {
-                if (!this.soup.isSameChainSelected(iResPressed)) {
-                    let chain = this.soup.getResidueProxy(iResPressed).chain
-                    let iStructure = this.soup.getResidueProxy(iResPressed).iStructure
-                    this.controller.selectChain(iStructure, chain)
-                    // this.controller.selectTraceOfResidue(iResPressed)
-                }
-            }
             if (!event.metaKey && !event.shiftKey) {
                 console.log('Got here')
                 this.controller.triggerAtom(iAtomPressed) // selects residue
@@ -523,13 +515,20 @@ class SoupWidget extends WebglWidget {
             } else {
                 this.controller.selectAdditionalResidue(this.iResFirstPressed)
             }
+            if (this.soupView.currentView.show.transparent) {
+                if (!this.soup.isSameChainSelected(iResPressed)) {
+                    let chain = this.soup.getResidueProxy(iResPressed).chain
+                    let iStructure = this.soup.getResidueProxy(iResPressed).iStructure
+                    this.controller.selectChain(iStructure, chain)
+                    // this.controller.selectTraceOfResidue(iResPressed)
+                }
+            }
         } else if (this.soup.residueStore.selected.includes(1)) {
             this.controller.clearSelectedResidues()
             let selectediRes = this.soup.selectedTraces.map(i => this.soup.traces[i]).map(t => this.soup.getResidueProxy(t.indices[0]))
             let chain = selectediRes[0].chain
             let iStructure = selectediRes[0].iStructure
             this.controller.selectChain(iStructure, chain)
-            
         }
         else {
             this.controller.clearSelectedResidues()
