@@ -501,6 +501,14 @@ class SoupWidget extends WebglWidget {
         let iAtomPressed = this.iAtomHover
         let iResPressed = this.soup.getAtomProxy(iAtomPressed).iRes
         if (util.exists(iResPressed) && iResPressed === this.iResFirstPressed) {
+            if (this.soupView.currentView.show.transparent) {
+                if (!this.soup.isSameChainSelected(iResPressed)) {
+                    let chain = this.soup.getResidueProxy(iResPressed).chain
+                    let iStructure = this.soup.getResidueProxy(iResPressed).iStructure
+                    this.controller.selectChain(iStructure, chain)
+                    // this.controller.selectTraceOfResidue(iResPressed)
+                }
+            }
             if (!event.metaKey && !event.shiftKey) {
                 console.log('Got here')
                 this.controller.triggerAtom(iAtomPressed) // selects residue
@@ -514,14 +522,6 @@ class SoupWidget extends WebglWidget {
                 this.controller.zoomToSelection()
             } else {
                 this.controller.selectAdditionalResidue(this.iResFirstPressed)
-            }
-            if (this.soupView.currentView.show.transparent) {
-                if (!this.soup.isSameChainSelected(iResPressed)) {
-                    let chain = this.soup.getResidueProxy(iResPressed).chain
-                    let iStructure = this.soup.getResidueProxy(iResPressed).iStructure
-                    this.controller.selectChain(iStructure, chain)
-                    // this.controller.selectTraceOfResidue(iResPressed)
-                }
             }
         } else if (this.soup.residueStore.selected.includes(1)) {
             this.controller.clearSelectedResidues()
