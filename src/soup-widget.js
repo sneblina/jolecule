@@ -524,11 +524,11 @@ class SoupWidget extends WebglWidget {
                 this.controller.selectAdditionalResidue(this.iResFirstPressed)
             }
         } else if (this.soup.residueStore.selected.includes(1)) {
+            this.controller.clearSelectedResidues()
             let lastiRes = this.controller.iResLastSelected
             let chain = this.soup.getResidueProxy(lastiRes).chain
             let iStructure = this.soup.getResidueProxy(lastiRes).iStructure
             this.controller.selectChain(iStructure, chain)
-            this.controller.clearSelectedResidues()
         }
         else {
             this.controller.clearSelectedResidues()
