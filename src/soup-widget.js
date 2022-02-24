@@ -516,14 +516,13 @@ class SoupWidget extends WebglWidget {
                 this.controller.selectAdditionalResidue(this.iResFirstPressed)
             }
             if (this.soupView.currentView.show.transparent) {
-                if (!this.soup.isSameChainSelected(iResPressed)) {
+                if (!this.soup.isSameChainSelected(iResPressed) && !event.metaKey && !event.shiftKey) {
                     let chain = this.soup.getResidueProxy(iResPressed).chain
                     let iStructure = this.soup.getResidueProxy(iResPressed).iStructure
                     this.controller.selectChain(iStructure, chain)
+                } else if (!this.soup.isSameChainSelected(iResPressed)) {
+                    this.controller.selectTraceOfResidue(iResPressed)
                 }
-                // else if (!this.soup.isSameChainSelected(iResPressed)) {
-                //     this.controller.selectTraceOfResidue(iResPressed)
-                // }
             }
         } else if (this.soup.residueStore.selected.includes(1)) {
             this.controller.clearSelectedResidues()
