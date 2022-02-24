@@ -525,10 +525,11 @@ class SoupWidget extends WebglWidget {
             }
         } else if (this.soup.residueStore.selected.includes(1)) {
             this.controller.clearSelectedResidues()
-            let lastiRes = this.controller.iResLastSelected
-            let chain = this.soup.getResidueProxy(lastiRes).chain
-            let iStructure = this.soup.getResidueProxy(lastiRes).iStructure
+            let selectediRes = this.soup.selectedTraces.map(i => this.soup.traces[i]).map(t => this.soup.getResidueProxy(t.indices[0]))
+            let chain = selectediRes[0].chain
+            let iStructure = selectediRes[0].iStructure
             this.controller.selectChain(iStructure, chain)
+            
         }
         else {
             this.controller.clearSelectedResidues()
